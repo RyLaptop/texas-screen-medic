@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texas Screen Medic</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Rubik:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --aluminum:#6e7275; --mesh:#232526; --orange:#d65a1f; --screen:#edefe9; --slate:#3a4b57;
+    --text:#232526; --text-soft:#565b5d; --line:#d8dbd3; --surface:#edefe9; --surface-2:#e2e5db;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --aluminum:#9a9ea1; --mesh:#e7e9e3; --orange:#e8763f; --screen:#151716; --slate:#8ba7b6;
+      --text:#e7e9e3; --text-soft:#adb2ab; --line:#33362f; --surface:#151716; --surface-2:#1c1f1c;
+    }
+  }
+  :root[data-theme="dark"]{
+    --aluminum:#9a9ea1; --mesh:#e7e9e3; --orange:#e8763f; --screen:#151716; --slate:#8ba7b6;
+    --text:#e7e9e3; --text-soft:#adb2ab; --line:#33362f; --surface:#151716; --surface-2:#1c1f1c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--surface); color:var(--text); font-family:'Rubik',system-ui,sans-serif; line-height:1.6;}
+  h1,h2,h3{font-family:'Barlow Semi Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.01em; text-wrap:balance; color:var(--mesh); font-weight:700;}
+  .mono{font-family:'Fira Mono',monospace;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+
+  .weave{
+    background-image:
+      repeating-linear-gradient(45deg, var(--line) 0, var(--line) 1px, transparent 1px, transparent 9px),
+      repeating-linear-gradient(-45deg, var(--line) 0, var(--line) 1px, transparent 1px, transparent 9px);
+    opacity:0.5;
+  }
+
+  header.top{padding:22px 0; border-bottom:1px solid var(--line);}
+  .topbar{display:flex; justify-content:space-between; align-items:center;}
+  .brand{font-family:'Barlow Semi Condensed',sans-serif; font-weight:700; font-size:1.3rem; text-transform:uppercase; color:var(--mesh);}
+  .brand span{color:var(--orange);}
+  nav{display:none; gap:24px;}
+  nav a{text-decoration:none; font-size:0.88rem; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.03em;}
+  @media(min-width:700px){nav{display:flex;}}
+
+  .hero{position:relative; overflow:hidden; padding:78px 0 58px;}
+  .hero .weave{position:absolute; inset:0; z-index:0;}
+  .hero .wrap{position:relative; z-index:1; display:grid; gap:24px; max-width:720px;}
+  .kicker{font-family:'Fira Mono',monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--orange);}
+  .hero h1{font-size:clamp(2.4rem,5.6vw,3.6rem); margin:0; line-height:1.06;}
+  .hero p{font-size:1.1rem; color:var(--text-soft); max-width:54ch; margin:0;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:6px;}
+  .btn{font-family:'Barlow Semi Condensed',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; font-size:0.92rem; padding:14px 24px; text-decoration:none; display:inline-block;}
+  .btn.solid{background:var(--orange); color:#151412;}
+  .btn.outline{border:2px solid var(--mesh); color:var(--mesh);}
+
+  section{padding:56px 0;}
+
+  .spec-sheet{border:1px solid var(--line); background:var(--surface-2);}
+  .spec-row{display:grid; grid-template-columns:160px 1fr; gap:20px; padding:18px 24px; border-bottom:1px solid var(--line); align-items:baseline;}
+  .spec-row:last-child{border-bottom:none;}
+  @media(max-width:600px){.spec-row{grid-template-columns:1fr; gap:4px;}}
+  .spec-row .label{font-family:'Fira Mono',monospace; font-size:0.8rem; text-transform:uppercase; color:var(--orange); letter-spacing:0.04em;}
+  .spec-row .val{color:var(--text-soft);}
+
+  .stat-strip{display:flex; border:2px solid var(--mesh);}
+  .stat{flex:1; padding:20px; text-align:center; border-right:2px solid var(--mesh);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block; font-family:'Barlow Semi Condensed',sans-serif; font-size:1.9rem; color:var(--orange);}
+  .stat span{font-size:0.72rem; text-transform:uppercase; color:var(--text-soft); letter-spacing:0.04em;}
+
+  .visit{display:grid; gap:36px; grid-template-columns:1fr 1fr;}
+  @media(max-width:760px){.visit{grid-template-columns:1fr;}}
+  .visit p{color:var(--text-soft);}
+
+  footer{padding:30px 0; font-family:'Fira Mono',monospace; font-size:0.76rem; color:var(--text-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  :focus-visible{outline:2px solid var(--orange); outline-offset:2px;}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <div class="brand">TEXAS <span>SCREEN MEDIC</span></div>
+    <nav><a href="#repairs">Repairs</a><a href="#specs">Mesh Options</a><a href="#visit">Get a Quote</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="weave"></div>
+  <div class="wrap">
+    <span class="kicker">South Austin — 78747</span>
+    <h1>Torn screen, bent frame, no seal left. Fixed on site, not replaced.</h1>
+    <p>Window and door screen repair for South Austin homes — new mesh, rebuilt frames, and re-fit door closers, without a full window replacement bill.</p>
+    <div class="hero-actions">
+      <a class="btn solid" href="#visit">Get a quote</a>
+      <a class="btn outline" href="#repairs">See repairs</a>
+    </div>
+  </div>
+</section>
+
+<section id="repairs">
+  <div class="wrap">
+    <h2>What gets repaired</h2>
+    <div class="spec-sheet">
+      <div class="spec-row"><span class="label">Window screens</span><span class="val">Re-mesh and re-spline, frame straightened if bent.</span></div>
+      <div class="spec-row"><span class="label">Door screens</span><span class="val">Rollers, closers, and full re-mesh for sliding and swing doors.</span></div>
+      <div class="spec-row"><span class="label">Patio enclosures</span><span class="val">Larger porch and patio screen panels, rebuilt in place.</span></div>
+      <div class="spec-row"><span class="label">Frame repair</span><span class="val">Bent or cracked aluminum frames straightened or rebuilt to fit.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <h2>Mesh on hand</h2>
+    <div class="spec-sheet">
+      <div class="spec-row"><span class="label">Fiberglass</span><span class="val">Standard mesh, most common for windows and doors.</span></div>
+      <div class="spec-row"><span class="label">Pet-resistant</span><span class="val">Heavier weave that holds up to claws and pushing.</span></div>
+      <div class="spec-row"><span class="label">Solar</span><span class="val">Tighter weave that cuts glare and heat through south-facing windows.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stat-strip">
+      <div class="stat"><b>24/7</b><span>Availability</span></div>
+      <div class="stat"><b>5.0★</b><span>Customer rating</span></div>
+      <div class="stat"><b>78747</b><span>South Austin base</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit">
+    <div>
+      <h2>Get a quote</h2>
+      <p>Tell us how many screens and what kind — window, door, or patio — and whether the frame's bent or just the mesh is torn. Most repairs are done on-site the same visit.</p>
+    </div>
+    <div>
+      <h2>Based in 78747</h2>
+      <p>Serving South Austin and the surrounding area.</p>
+      <a class="btn solid" href="#visit">Request a quote</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>TEXAS SCREEN MEDIC — SOUTH AUSTIN, TX 78747</span>
+  <span>WINDOW &amp; DOOR SCREEN REPAIR</span>
+</footer>
+</body>
+</html>
